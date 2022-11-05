@@ -1,0 +1,45 @@
+.storeCardHero::before {
+    display: block;
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    background:
+      linear-gradient(45deg, hsla(190, 95%, 43%, 1) 0%, hsla(190, 95%, 43%, 0) 70%),
+      linear-gradient(135deg, hsla(219, 93%, 48%, 1) 10%, hsla(219, 93%, 48%, 0) 80%),
+      linear-gradient(225deg, hsla(293, 93%, 48%, 1) 10%, hsla(293, 93%, 48%, 0) 80%),
+      linear-gradient(315deg, hsla(130, 96%, 45%, 1) 100%, hsla(130, 96%, 45%, 0) 70%);
+    opacity: 0.6;
+    z-index: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+}
+.title {
+  word-wrap: break-word;
+  position: relative;
+  z-index: 2;
+  margin:0;
+  font-size: 40px;
+  z-index: 2;
+  line-height:1.1;
+  transform: skew(0, -3deg);
+  line-height:1.1;
+}
+.title::before {
+    content: '';
+    width:50px;
+    left:0;
+    top:0;
+    height:100%;
+    /* // top:10%; */
+    display: block;
+    position: absolute;
+    z-index: -1;
+    transform:skew(-5deg)
+}
+
+.title a {
+  border-bottom: 0;
+  background-image: linear-gradient(to right, rgba(255,196,14,0.8) 100%, rgba(255,196,14,0.8) 50%);
+}
