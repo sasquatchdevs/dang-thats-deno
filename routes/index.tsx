@@ -1,16 +1,12 @@
 import { Head } from "$fresh/runtime.ts";
-import { NavigationBar } from "../components/NavigationBar.tsx";
+import { Layout } from "../components/Layout.tsx";
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>Fresh App</title>
-      </Head>
+    <Layout pageTitle="Home">
       <div class="">
-        <NavigationBar />
         hello world
       </div>
-    </>
+    </Layout>
   );
 }
