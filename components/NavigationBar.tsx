@@ -8,7 +8,7 @@ export function NavigationBar() {
         <div class="flex flex-row w-full sm:w-auto order-none sm:order-1 lg:order-none list-none p-0 my-4 mx-0">
           <li className="">
             <a
-              href="#"
+              href="/"
               class="px-4 flex flex-col items-center justify-center align-middle"
             >
               <img
@@ -147,13 +147,13 @@ export function NavigationBar() {
           <li>
             <NavLink
               label="Register"
-              href="#Register"
+              href="/auth/register"
             />
           </li>
           <li>
             <NavLink
               label="Login"
-              href="#Login"
+              href="/auth/login"
             />
           </li>
         </div>
