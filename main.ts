@@ -9,7 +9,9 @@ import manifest from "./fresh.gen.ts";
 
 import twindPlugin from "$fresh/plugins/twind.ts";
 import twindConfig from "./twind.config.ts";
-import db from "./db/client.ts";
 
-await db.sync({ drop: true });
-await start(manifest, { plugins: [twindPlugin(twindConfig)] });
+try {
+  await start(manifest, { plugins: [twindPlugin(twindConfig)] });
+} catch (error) {
+  console.log(error?.message);
+}

@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["deno"]
+  output          = "../generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id     BigInt @id @default(autoincrement())
+  name   String
+  avatar String
+  email  String
+  hash   String
+  salt   String
+}
+
+model Store {
+  id          BigInt @id @default(autoincrement())
+  name        String
+  slug        String @unique
+  heroImg     String
+  description String
+  address     String
+  lat         Float
+  lng         Float
+  tags        String
+  status      Int
+}
