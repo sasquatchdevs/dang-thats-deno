@@ -1,5 +1,6 @@
 import { Handlers } from "$fresh/server.ts";
-import { User } from "../../../db/models/User.ts";
+// import { User } from "../../../db/models/User.ts";
+import prisma from "../../../db/client.ts";
 import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.0/mod.ts";
 import { encode, Hash } from "https://deno.land/x/checksum@1.2.0/mod.ts";
 
@@ -38,14 +39,15 @@ export const handler: Handlers = {
     ).hex();
     const avatar = `https://www.gravatar.com/avatar/${hashEmail}.jpg?s=400`;
 
-    const userCount = await User.count();
-    const user = await User.create({
-      id: userCount,
-      avatar,
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      hash: hashedPass,
-      salt,
+    // const userCount = await prisma.user.count();
+    const user = await prisma.user.create({
+      data: {
+        avatar,
+        name: formData.get("name") as string,
+        email: formData.get("email") as string,
+        hash: hashedPass,
+        salt,
+      },
     });
 
     console.log({ user });
