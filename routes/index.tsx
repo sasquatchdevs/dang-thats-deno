@@ -1,13 +1,17 @@
-import { Layout } from "../components/Layout.tsx";
-import StoreList from "../islands/StoreList.tsx";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Layout } from "../components/Layout.tsx";
 import prisma from "../db/client.ts";
 import type { Store } from "../generated/client/deno/index.d.ts";
+import StoreList from "../islands/StoreList.tsx";
+import { toObject } from "../utils/toObj.ts";
 
 export const handler: Handlers<Store[]> = {
   async GET(_req, ctx) {
-    const stores = await prisma.store.findMany({});
-    return ctx.render(stores ?? []);
+    const stores = await prisma.store.findMany({
+      take: 10,
+      where: { status: { equals: 0 } },
+    });
+    return ctx.render(toObject(stores) ?? []);
   },
 };
 

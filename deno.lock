@@ -235,6 +235,8 @@
     "https://deno.land/std@0.162.0/uuid/v1.ts": "7123410ef9ce980a4f2e54a586ccde5ed7063f6f119a70d86eebd92f8e100295",
     "https://deno.land/std@0.162.0/uuid/v4.ts": "3e983c6ac895ea2a7ba03da927a2438fe1c26ac43fb38dc44f2f8aa50c23cb53",
     "https://deno.land/std@0.162.0/uuid/v5.ts": "43973aeda44ad212f2ec9b8d6c042b74d5cef4ce583d6aa6fc4cdb339344c74c",
+    "https://deno.land/std@0.163.0/dotenv/mod.ts": "b149416f0daa0361873097495d16adbb321b8bcb594dcc5cdb6bf9639fd173fd",
+    "https://deno.land/std@0.163.0/dotenv/util.ts": "6cc392f087577a26a27f0463f77cc0c31a390aa055917099935b36eb2454592d",
     "https://deno.land/std@0.77.0/fmt/colors.ts": "c5665c66f1a67228f21c5989bbb04b36d369b98dd7ceac06f5e26856c81c2531",
     "https://deno.land/x/bcrypt@v0.4.0/mod.ts": "ff09bdae282583cf5f7d87efe37ddcecef7f14f6d12e8b8066a3058db8c6c2f7",
     "https://deno.land/x/bcrypt@v0.4.0/src/bcrypt/base64.ts": "b8266450a4f1eb6960f60f2f7986afc4dde6b45bd2d7ee7ba10789e67e17b9f7",
