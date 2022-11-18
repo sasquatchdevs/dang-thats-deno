@@ -115,7 +115,7 @@ export function NavigationBar() {
           <li>
             <NavLink
               label="Add"
-              href="#Add"
+              href="/stores/create"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,10 +1,11 @@
 import { Layout } from "../../components/Layout.tsx";
+import { InputField } from "../../components/forms/InputField.tsx";
 
 export default function RegisterPage() {
   return (
     <Layout pageTitle="Register">
-      <div class="container mx-auto max-w-7xl">
-        <div class="p-8 bg-white mt-12">
+      <div class="container mx-auto max-w-7xl pt-12">
+        <div class="p-8 bg-white ">
           <div class="m-0 pb-6 mb-2 border-b-1 border-solid border-gray-300">
             <h2 class="text-2xl text-gray-800">
               Register
@@ -29,25 +30,6 @@ export default function RegisterPage() {
     </Layout>
   );
 }
-
-const InputField = (
-  { name, type = "text" }: { name: string; type?: string },
-) => {
-  return (
-    <fieldset>
-      <label class="py-4 block capitalize" htmlFor={name}>
-        {name}
-      </label>
-      <input
-        id={name}
-        name={name}
-        type={type}
-        class="w-full p-3 border border-solid border-gray-300 overflow-visible m-0"
-        autocomplete="on"
-      />
-    </fieldset>
-  );
-};
 
 // form.form(action="/register" method="POST")
 //     h2 Register

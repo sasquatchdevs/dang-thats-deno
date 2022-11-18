@@ -1,8 +1,10 @@
+import { Store } from "../generated/client/deno/index.d.ts";
+
 type Props = {
-  store?: Record<string, unknown>;
+  store: Store;
 };
 
-export function StoreCard({}: Props) {
+export function StoreCard({ store }: Props) {
   return (
     <div class="bg-white ml-6 mt-6 shadow-md w-full sm:w-[45%] lg:w-[30%] relative">
       {/* need to add before classes above */}
@@ -84,14 +86,14 @@ export function StoreCard({}: Props) {
         />
         <h3 class="title">
           {/* add before classes */}
-          <a href="#stores/[slug]">
-            Pizza School
+          <a href={`/stores/${store.slug}`}>
+            {store.name}
           </a>
         </h3>
       </div>
       {/* DETAILS BELOW */}
       <div class="p-6">
-        <p>Details</p>
+        <p>{store.description}</p>
       </div>
     </div>
   );
