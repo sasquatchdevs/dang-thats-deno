@@ -20,9 +20,9 @@ export function Layout({ pageTitle = "Fresh", children }: Props) {
         <link rel="stylesheet" href={asset("style.css")} />
         <title>{pageTitle} | Dang that&apos;s Deno!</title>
       </Head>
-      <main class="bg-gray-200 h-screen">
+      <main class=" h-screen">
         <NavigationBar />
-        <div>
+        <div className="bg-gray-200 h-full">
           {children}
         </div>
       </main>
