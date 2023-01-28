@@ -2,10 +2,11 @@ interface IFormFieldProps {
   name: string;
   type?: string;
   required?: boolean;
+  error?: string;
 }
 
 export const InputField = (
-  { name, type = "text", required = false }: IFormFieldProps,
+  { name, type = "text", required = false, error }: IFormFieldProps,
 ) => {
   return (
     <fieldset className="w-full">
@@ -20,6 +21,9 @@ export const InputField = (
         autocomplete="on"
         required={required}
       />
+      <p className="text-red-500 text-xs pl-3 pt-2 min-h-[8px]">
+        {error && error}
+      </p>
     </fieldset>
   );
 };
