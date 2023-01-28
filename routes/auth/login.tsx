@@ -1,18 +1,40 @@
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { InputField } from "../../components/forms/InputField.tsx";
 import { Layout } from "../../components/Layout.tsx";
+import prisma from "../../db/client.ts";
+import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.0/mod.ts";
 
-export default function LoginPage() {
+interface ILoginFormData {
+  email: string;
+  password: string;
+}
+
+export default function LoginPage(
+  props: PageProps<{ errors: Record<string, string> }>,
+) {
   return (
     <Layout pageTitle="Login">
-      <div class="container mx-auto max-w-7xl">
-        <div class="p-8">
-          <h2 class="text-6xl text-gray-800 my-12">
-            Register
-          </h2>
-          <div class="-ml-8 -mt-8">
-            <form>
-              <label htmlFor="name">
-                <input type="text" name="name" />
-              </label>
+      <div class="container mx-auto max-w-7xl pt-12">
+        <div class="p-8 bg-white">
+          <div class="m-0 pb-6 mb-2 border-b-1 border-solid border-gray-300">
+            <h2 class="text-2xl text-gray-800">
+              Login
+            </h2>
+          </div>
+          <div class="">
+            <form method="POST" action="/api/auth/login">
+              <InputField name="email" error={props?.data?.errors?.email} />
+              <InputField
+                name="password"
+                type="password"
+                error={props?.data?.errors?.password}
+              />
+              <button
+                type="submit"
+                class="border-none bg-yellow-400 text-gray-800 font-semibold w-full p-3 mt-6"
+              >
+                Login →
+              </button>
             </form>
           </div>
         </div>

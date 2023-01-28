@@ -2,6 +2,7 @@ import { Layout } from "../../components/Layout.tsx";
 import { InputField } from "../../components/forms/InputField.tsx";
 import { Handlers } from "$fresh/server.ts";
 import prisma from "../../db/client.ts";
+import { getCookies } from "$std/http/cookie.ts";
 
 interface IFormData {
   name: string;
@@ -11,6 +12,16 @@ interface IFormData {
 }
 
 export const handler: Handlers = {
+  GET(req, ctx) {
+    const cookies = getCookies(req.headers);
+    if (cookies.auth === "bar") {
+      return ctx.render!();
+    } else {
+      const url = new URL(req.url);
+      url.pathname = "/auth/login";
+      return Response.redirect(url);
+    }
+  },
   POST: async (req, ctx) => {
     const body = await req.formData();
     const newStore = await prisma.store.create({
