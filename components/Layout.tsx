@@ -1,13 +1,17 @@
 import { asset, Head } from "https://deno.land/x/fresh@1.1.2/runtime.ts";
 import { ComponentChildren } from "https://esm.sh/v96/preact@10.11.0/src/index.d.ts";
 import { NavigationBar } from "./NavigationBar.tsx";
+import { type User } from "supabase";
 
 type Props = {
   pageTitle: string;
   children?: ComponentChildren;
+  user?: User;
 };
 
-export function Layout({ pageTitle = "Fresh", children }: Props) {
+export function Layout({ pageTitle = "Fresh", children, user }: Props) {
+  const isAuthenticated = !!user;
+
   return (
     <>
       <Head>
@@ -21,7 +25,7 @@ export function Layout({ pageTitle = "Fresh", children }: Props) {
         <title>{pageTitle} | Dang that&apos;s Deno!</title>
       </Head>
       <main class=" h-screen">
-        <NavigationBar />
+        <NavigationBar isAuthenticated={isAuthenticated} />
         <div className="bg-gray-200 h-full">
           {children}
         </div>

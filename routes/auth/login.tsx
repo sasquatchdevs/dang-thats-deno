@@ -1,13 +1,6 @@
-import { Handlers, PageProps } from "$fresh/server.ts";
+import { PageProps } from "$fresh/server.ts";
 import { InputField } from "../../components/forms/InputField.tsx";
 import { Layout } from "../../components/Layout.tsx";
-import prisma from "../../db/client.ts";
-import * as bcrypt from "https://deno.land/x/bcrypt@v0.4.0/mod.ts";
-
-interface ILoginFormData {
-  email: string;
-  password: string;
-}
 
 export default function LoginPage(
   props: PageProps<{ errors: Record<string, string> }>,

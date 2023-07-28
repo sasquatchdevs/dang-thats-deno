@@ -1,4 +1,4 @@
-import { Store } from "../generated/client/deno/index.d.ts";
+import { Store } from "../types/index.d.ts";
 
 type Props = {
   store: Store;

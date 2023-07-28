@@ -27,7 +27,7 @@ export const handler: Handlers = {
 
     if (user && !session) {
       console.error("needs to verify email");
-      return new Response(null, { status: 400 });
+      // return new Response(null, { status: 400 });
     }
 
     const exists = await supabase.auth.getUser(String(user));

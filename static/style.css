@@ -21,10 +21,8 @@
   z-index: 2;
   margin:0;
   font-size: 40px;
-  z-index: 2;
   line-height:1.1;
   transform: skew(0, -3deg);
-  line-height:1.1;
 }
 .title::before {
     content: '';

@@ -1,65 +1,45 @@
+import { HandlerContext, Handlers, PageProps } from "$fresh/server.ts";
 import { Layout } from "../../components/Layout.tsx";
 import { InputField } from "../../components/forms/InputField.tsx";
-import { Handlers } from "$fresh/server.ts";
-import prisma from "../../db/client.ts";
-import { getCookies } from "$std/http/cookie.ts";
+import { supabase } from "../../lib/supabase.ts";
+import { type User } from "supabase";
 
-interface IFormData {
-  name: string;
-  description: string;
-  address: string;
-  hero?: string;
+interface IPagePayload {
+  user: User;
 }
 
-export const handler: Handlers = {
-  GET(req, ctx) {
-    const cookies = getCookies(req.headers);
-    if (cookies.auth === "bar") {
-      return ctx.render!();
-    } else {
-      const url = new URL(req.url);
-      url.pathname = "/auth/login";
-      return Response.redirect(url);
-    }
+export const handler: Handlers<IPagePayload> = {
+  GET(_req, ctx) {
+    return ctx.render(
+      {
+        user: ctx.state.user as IPagePayload["user"],
+      },
+    );
   },
   POST: async (req, ctx) => {
-    const body = await req.formData();
-    const newStore = await prisma.store.create({
-      data: {
-        name: body.get("name") as string,
-        slug: body.get("name") as string, // TODO: slugify
-        description: body.get("description") as string,
-        heroImg: "", // TODO: upload to cloudinary
-        address: body.get("address") as string,
-        lat: 0.0, // TODO: get lat
-        lng: 0.0, // TODO: get long
-        status: 0, // 0 = Draft
-        tags: "", // TODO: comma seperated
-        author: {
-          // TODO: AUTH
-          connectOrCreate: {
-            where: {
-              email: "mark@me.com",
-            },
-            create: {
-              name: "Mark Ambro",
-              email: "mark@me.com",
-              avatar: "mark.jpg",
-              hash: "mark@me.com",
-              salt: "mark@me.com",
-            },
-          },
-        },
-      },
-    });
+    const form = await req.formData();
+    const { data: newStore } = await supabase.from("Store").insert({
+      name: form.get("name") as string,
+      slug: form.get("name") as string, // TODO: slugify
+      description: form.get("description") as string,
+      heroImg: "", // TODO: upload to cloudinary
+      address: form.get("address") as string,
+      lat: 0.0, // TODO: get lat
+      lng: 0.0, // TODO: get long
+      status: 0, // 0 = Draft
+      tags: "", // TODO: comma seperated
+      authorId: ctx.state.user,
+    }).select();
     const origin = new URL(req.url).origin;
-    return Response.redirect(new URL(origin + `/stores/${newStore?.slug}`));
+    return Response.redirect(
+      new URL(origin + `/stores/${newStore?.[0]?.slug}`),
+    );
   },
 };
 
-export default function Create() {
+export default function Create({ data }: PageProps<IPagePayload>) {
   return (
-    <Layout pageTitle="Add a Store">
+    <Layout pageTitle="Add a Store" user={data.user}>
       <div class="container mx-auto max-w-7xl h-full">
         <div class="p-8">
           <h2 class="text-6xl text-gray-800 my-12">

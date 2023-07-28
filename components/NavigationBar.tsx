@@ -1,6 +1,10 @@
 import { NavLink } from "./NavLink.tsx";
 
-export function NavigationBar() {
+interface Props {
+  isAuthenticated: boolean;
+}
+
+export function NavigationBar({ isAuthenticated }: Props) {
   return (
     <header class="bg-gray-800 text-white ">
       <div class="pt-4 bg-linear" />
@@ -112,27 +116,31 @@ export function NavigationBar() {
               </svg>
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              label="Add"
-              href="/stores/create"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6 group-hover:scale-125 transition-all duration-150 mb-3"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 4.5v15m7.5-7.5h-15"
-                />
-              </svg>
-            </NavLink>
-          </li>
+          {isAuthenticated
+            ? (
+              <li>
+                <NavLink
+                  label="Add"
+                  href="/stores/create"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6 group-hover:scale-125 transition-all duration-150 mb-3"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 4.5v15m7.5-7.5h-15"
+                    />
+                  </svg>
+                </NavLink>
+              </li>
+            )
+            : null}
         </div>
         <div class="order-none sm:order-2 lg:order-none w-full lg:w-auto flex-auto ">
           <div class="relative w-full flex">
@@ -144,18 +152,122 @@ export function NavigationBar() {
           </div>
         </div>
         <div class="order-first sm:order-1 lg:order-none flex list-none">
-          <li>
-            <NavLink
-              label="Register"
-              href="/auth/register"
-            />
-          </li>
-          <li>
-            <NavLink
-              label="Login"
-              href="/auth/login"
-            />
-          </li>
+          {!isAuthenticated
+            ? (
+              <>
+                <li>
+                  <NavLink
+                    label="Register"
+                    href="/auth/register"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6 group-hover:scale-125 transition-all duration-150 mb-3"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+                      />
+                    </svg>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    label="Login"
+                    href="/auth/login"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6 group-hover:scale-125 transition-all duration-150 mb-3"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                  </NavLink>
+                </li>
+              </>
+            )
+            : (
+              <>
+                <li>
+                  <li>
+                    <NavLink
+                      label="Fav"
+                      href="/my/favorites"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        class="w-6 h-6 group-hover:scale-125 transition-all duration-150 mb-3"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                        />
+                      </svg>
+                    </NavLink>
+                  </li>
+                </li>
+                <li>
+                  <NavLink
+                    label="Logout"
+                    href="/api/auth/logout"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6 group-hover:scale-125 transition-all duration-150 mb-3"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                      />
+                    </svg>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    label="Account"
+                    href="/my/account"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6 group-hover:scale-125 transition-all duration-150 mb-3"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                    </svg>
+                  </NavLink>
+                </li>
+              </>
+            )}
         </div>
       </nav>
     </header>
